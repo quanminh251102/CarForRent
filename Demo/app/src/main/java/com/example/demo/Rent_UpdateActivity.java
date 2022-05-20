@@ -30,11 +30,15 @@ import java.util.List;
 
 public class Rent_UpdateActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-    Spinner rent_update_activity_regno_spinner;
-    Spinner rent_update_activity_cusid_spinner;
+//    Spinner rent_update_activity_regno_spinner;
+//    Spinner rent_update_activity_cusid_spinner;
+
     EditText rent_update_activity_rentaldate;
     EditText rent_update_activity_returndate;
     EditText rent_update_activity_fees;
+    EditText rent_update_activity_regno;
+    EditText rent_update_activity_cusid;
+
     Button rent_update_activity_rentaldate_button;
     Button rent_update_activity_returndate_button;
     Button rent_update_activity_update_button;
@@ -62,8 +66,8 @@ public class Rent_UpdateActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rent_update);
 
-        rent_update_activity_regno_spinner = findViewById(R.id.rent_update_activity_regno_spinner);
-        rent_update_activity_cusid_spinner = findViewById(R.id.rent_update_activity_cusid_spinner);
+//        rent_update_activity_regno_spinner = findViewById(R.id.rent_update_activity_regno_spinner);
+//        rent_update_activity_cusid_spinner = findViewById(R.id.rent_update_activity_cusid_spinner);
         rent_update_activity_rentaldate = findViewById(R.id.rent_update_activity_rentaldate);
         rent_update_activity_returndate = findViewById(R.id.rent_update_activity_returndate);
         rent_update_activity_fees = findViewById(R.id.rent_update_activity_fees);
@@ -72,51 +76,54 @@ public class Rent_UpdateActivity extends AppCompatActivity implements AdapterVie
         rent_update_activity_update_button = findViewById(R.id.rent_update_activity_update_button);
         rent_update_activity_delete_button = findViewById(R.id.rent_update_activity_delete_button);
         rent_update_activity_fees_button = findViewById(R.id.rent_update_activity_fees_button);
+        rent_update_activity_regno = findViewById(R.id.rent_update_activity_regno);
+        rent_update_activity_cusid = findViewById(R.id.rent_update_activity_cusid);
 
-        rent_update_activity_regno_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
-                // On selecting a spinner item
-                String label = parentView.getItemAtPosition(position).toString();
-
-                // Showing selected spinner item
-                Toast.makeText(parentView.getContext(), list_regno.get(position),
-                        Toast.LENGTH_LONG).show();
-
-                regno = list_regno.get(position);
-                regno_check = true;
-//                caculator_fees();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-
-        });
-        rent_update_activity_cusid_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
-                // On selecting a spinner item
-                String label = parentView.getItemAtPosition(position).toString();
-
-                // Showing selected spinner item
-                Toast.makeText(parentView.getContext(), list_cusid.get(position),
-                        Toast.LENGTH_LONG).show();
-                cusid_check = true;
-                cusid = list_cusid.get(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-
-        });
-        load_car_spinner_data();
-        load_customer_spinner_data();
+//        rent_update_activity_regno_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+//                // your code here
+//                // On selecting a spinner item
+//                String label = parentView.getItemAtPosition(position).toString();
+//
+//                // Showing selected spinner item
+//                Toast.makeText(parentView.getContext(), list_regno.get(position),
+//                        Toast.LENGTH_LONG).show();
+//
+////                regno = list_regno.get(position);
+//
+//                regno_check = true;
+////                caculator_fees();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parentView) {
+//                // your code here
+//            }
+//
+//        });
+//        rent_update_activity_cusid_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+//                // your code here
+//                // On selecting a spinner item
+//                String label = parentView.getItemAtPosition(position).toString();
+//
+//                // Showing selected spinner item
+//                Toast.makeText(parentView.getContext(), list_cusid.get(position),
+//                        Toast.LENGTH_LONG).show();
+//                cusid_check = true;
+//                cusid = list_cusid.get(position);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parentView) {
+//                // your code here
+//            }
+//
+//        });
+//        load_car_spinner_data();
+//        load_customer_spinner_data();
 
         Calendar c = Calendar.getInstance();
         final int year_1 = c.get(Calendar.YEAR);
@@ -237,14 +244,16 @@ public class Rent_UpdateActivity extends AppCompatActivity implements AdapterVie
             returndate = getIntent().getStringExtra("returndate");
             fees = getIntent().getStringExtra("fees");
 
-            int index_regno = getIndex_regno(rent_update_activity_regno_spinner, regno);
-            rent_update_activity_regno_spinner.setSelection(index_regno);
-
-            int index_cusid = getIndex_cusid(rent_update_activity_cusid_spinner, cusid);
-            rent_update_activity_cusid_spinner.setSelection(index_cusid);
+//            int index_regno = getIndex_regno(rent_update_activity_regno_spinner, regno);
+//            rent_update_activity_regno_spinner.setSelection(index_regno);
+//
+//            int index_cusid = getIndex_cusid(rent_update_activity_cusid_spinner, cusid);
+//            rent_update_activity_cusid_spinner.setSelection(index_cusid);
 
 
             //Setting Intent Data
+            rent_update_activity_regno.setText(regno);
+            rent_update_activity_cusid.setText(cusid);
             rent_update_activity_rentaldate.setText(rentaldate);
             rent_update_activity_returndate.setText(returndate);
             rent_update_activity_fees.setText(fees);
@@ -283,13 +292,13 @@ public class Rent_UpdateActivity extends AppCompatActivity implements AdapterVie
 
     void confirmDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Xóa phiếu thuê " + regno + " ?");
+        builder.setTitle("Xóa phiếu thuê " +rent_id + " ?");
         builder.setMessage("Bạn chắc chắn muốn xóa phiếu thuê " + rent_id + " ?");
         builder.setPositiveButton("Đúng", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 DBHelper myDB = new DBHelper(Rent_UpdateActivity.this);
-                myDB.delete_one_rent(rent_id);
+                myDB.delete_one_rent(rent_id,regno);
                 finish();
             }
         });
@@ -357,35 +366,35 @@ public class Rent_UpdateActivity extends AppCompatActivity implements AdapterVie
 //            rent_update_activity_fees.setText(rental_date[0] + "+" + return_date[0]);
         }
     }
-    private void load_car_spinner_data() {
-        List<String> labels = db.get_all_car_spinner();
+//    private void load_car_spinner_data() {
+//        List<String> labels = db.get_all_car_spinner();
+//
+//        list_regno = db.get_all_car_regno_spinner();
+//
+//        // Creating adapter for spinner
+//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, labels);
+//
+//        // Drop down layout style - list view with radio button
+//        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//
+//        // attaching data adapter to spinner
+//        rent_update_activity_regno_spinner.setAdapter(dataAdapter);
+//    }
 
-        list_regno = db.get_all_car_regno_spinner();
-
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, labels);
-
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
-        rent_update_activity_regno_spinner.setAdapter(dataAdapter);
-    }
-
-    private void load_customer_spinner_data() {
-        List<String> labels = db.get_all_customer_spinner();
-
-        list_cusid = db.get_all_customer_id_spinner();
-
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, labels);
-
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
-        rent_update_activity_cusid_spinner.setAdapter(dataAdapter);
-    }
+//    private void load_customer_spinner_data() {
+//        List<String> labels = db.get_all_customer_spinner();
+//
+//        list_cusid = db.get_all_customer_id_spinner();
+//
+//        // Creating adapter for spinner
+//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, labels);
+//
+//        // Drop down layout style - list view with radio button
+//        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//
+//        // attaching data adapter to spinner
+//        rent_update_activity_cusid_spinner.setAdapter(dataAdapter);
+//    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position,

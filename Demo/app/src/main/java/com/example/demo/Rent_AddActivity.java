@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -195,6 +196,9 @@ public class Rent_AddActivity extends AppCompatActivity implements AdapterView.O
                         returndate,
                         fees
                 );
+
+                Intent intent = new Intent(Rent_AddActivity.this, Rent_MainActivity.class);
+                startActivity(intent);
             }
         });
 

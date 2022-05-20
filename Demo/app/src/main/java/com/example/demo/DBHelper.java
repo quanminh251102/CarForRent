@@ -19,7 +19,7 @@ class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "ManageGarageDB.db";
     public  static final int DATABASE_VERSION = 1;
 
-    //table account
+    // region table account
 
 
     private static final String CREATE_TABLE_ACCOUNT = "create Table Account(Username TEXT primary key, Password TEXT, Phonenumber TEXT, Fullname TEXT, Email TEXT, RegisterID TEXT)";
@@ -151,6 +151,7 @@ class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    // endregion
 
     // region table customer
     private static final String TABLE_CUSTOMER = "Customer";
@@ -322,6 +323,8 @@ class DBHelper extends SQLiteOpenHelper {
         cv.put(KEY_RETURNDATE,getDateTime(renturndate));
         cv.put(KEY_FEES,fees);
 
+        updateData_car_available_with_regno(carreg,"0");
+
         long result = db.insert(TABLE_RENT,null, cv);
         if(result == -1){
             Toast.makeText(context, "Thêm thất bại", Toast.LENGTH_SHORT).show();
@@ -340,6 +343,7 @@ class DBHelper extends SQLiteOpenHelper {
         }
         return cursor;
     }
+
 
     void updateData_rent(String row_id,String carreg, Integer rent_cusid,String rentaldate,String renturndate, Integer fees){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -360,9 +364,11 @@ class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    void delete_one_rent(String row_id){
+    void delete_one_rent(String row_id, String _regno){
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_RENT, KEY_RENTID+"=?", new String[]{row_id});
+
+        updateData_car_available_with_regno(_regno,"1");
 
         if(result == -1){
             Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
@@ -410,6 +416,8 @@ class DBHelper extends SQLiteOpenHelper {
         cv.put(KEY_MODEL, model);
         cv.put(KEY_PRICE, price);
         cv.put(KEY_AVAILABLE, available);
+
+        Toast.makeText(context, "xe" + available, Toast.LENGTH_SHORT).show();
 
         long result = db.insert(TABLE_CAR,null, cv);
         if(result == -1){
@@ -462,6 +470,16 @@ class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    void updateData_car_available_with_regno(String _regno, String _available){
+        String query = "UPDATE " + TABLE_CAR +
+                " SET " + KEY_AVAILABLE + "=" + _available +
+                " WHERE " + KEY_REGNO + "=" + "'" + _regno + "' ";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        db.execSQL(query);
+
+    }
+
     void delete_one_car(String row_id){
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_CAR, KEY_CAR_ID+"=?", new String[]{row_id});
@@ -482,7 +500,7 @@ class DBHelper extends SQLiteOpenHelper {
         List<String> list = new ArrayList<String>();
 
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_CAR;
+        String selectQuery = "SELECT  * FROM " + TABLE_CAR + " where Available=1" ;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);//selectQuery,selectedArguments
@@ -506,7 +524,7 @@ class DBHelper extends SQLiteOpenHelper {
         List<String> list = new ArrayList<String>();
 
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_CAR;
+        String selectQuery = "SELECT  * FROM " + TABLE_CAR + " where Available=1" ;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);//selectQuery,selectedArguments

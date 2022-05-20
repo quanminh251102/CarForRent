@@ -15,8 +15,8 @@ public class Car_AddActivity extends AppCompatActivity {
     EditText car_model;
     EditText car_price;
     EditText car_available;
-    RadioButton car_activity_add_radio_button_true;
-    RadioButton car_activity_add_radio_button_false;
+//    RadioButton car_activity_add_radio_button_true;
+//    RadioButton car_activity_add_radio_button_false;
     Button car_add_button;
 
     @Override
@@ -28,11 +28,13 @@ public class Car_AddActivity extends AppCompatActivity {
         car_brand = findViewById(R.id.car_brand);
         car_model = findViewById(R.id.car_model);
         car_price = findViewById(R.id.car_price);
-        car_activity_add_radio_button_true = findViewById(R.id.car_activity_add_radio_button_true);
-        car_activity_add_radio_button_false = findViewById(R.id.car_activity_add_radio_button_false);
+
+//        car_activity_add_radio_button_true = findViewById(R.id.car_activity_add_radio_button_true);
+//        car_activity_add_radio_button_false = findViewById(R.id.car_activity_add_radio_button_false);
+
         car_add_button = findViewById(R.id.car_add_button);
 
-        car_activity_add_radio_button_true.setChecked(true);
+//        car_activity_add_radio_button_true.setChecked(true);
         car_price.setText("0");
 
         car_add_button.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +50,8 @@ public class Car_AddActivity extends AppCompatActivity {
                         car_brand.getText().toString().trim(),
                         car_model.getText().toString().trim(),
                         Integer.valueOf(carPrice),
-                        car_activity_add_radio_button_true.isChecked()
+//                        car_activity_add_radio_button_true.isChecked()
+                        true
                 );
             }
         });

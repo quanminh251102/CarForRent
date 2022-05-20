@@ -19,8 +19,10 @@ public class Car_UpdateActivity extends AppCompatActivity {
     EditText car_update_activity_brand;
     EditText car_update_activity_model;
     EditText car_update_activity_price;
-    RadioButton car_update_activity_radio_button_true;
-    RadioButton car_update_activity_radio_button_false;
+
+//    RadioButton car_update_activity_radio_button_true;
+//    RadioButton car_update_activity_radio_button_false;
+
     Button car_update_activity_update_button;
     Button car_update_activity_delete_button;
 
@@ -40,8 +42,10 @@ public class Car_UpdateActivity extends AppCompatActivity {
         car_update_activity_brand = findViewById(R.id.car_update_activity_brand);
         car_update_activity_model = findViewById(R.id.car_update_activity_model);
         car_update_activity_price = findViewById(R.id.car_update_activity_price);
-        car_update_activity_radio_button_true = findViewById(R.id.car_activity_update_radio_button_true);
-        car_update_activity_radio_button_false = findViewById(R.id.car_activity_update_radio_button_false);
+
+//        car_update_activity_radio_button_true = findViewById(R.id.car_activity_update_radio_button_true);
+//        car_update_activity_radio_button_false = findViewById(R.id.car_activity_update_radio_button_false);
+
         car_update_activity_update_button = findViewById(R.id.car_update_activity_update_button);
         car_update_activity_delete_button = findViewById(R.id.car_update_activity_delete_button);
 
@@ -63,8 +67,14 @@ public class Car_UpdateActivity extends AppCompatActivity {
                 brand = car_update_activity_brand.getText().toString().trim();
                 model = car_update_activity_model.getText().toString().trim();
                 Integer car_price = Integer.valueOf(car_update_activity_price.getText().toString().trim());
-                Boolean car_available = car_update_activity_radio_button_true.isChecked();
 
+
+//                Boolean car_available = car_update_activity_radio_button_true.isChecked();
+                Boolean car_available = true;
+                if (available == "1") car_available = true;
+                else {
+                    car_available = false;
+                }
                 myDB.updateData_car(car_id, regno, brand, model, car_price, car_available);
             }
         });
@@ -97,14 +107,16 @@ public class Car_UpdateActivity extends AppCompatActivity {
             car_update_activity_brand.setText(brand);
             car_update_activity_model.setText(model);
             car_update_activity_price.setText(price);
-            if (available.equals("1")) {
-                car_update_activity_radio_button_true.setChecked(true);
-                car_update_activity_radio_button_false.setChecked(false);
-            }
-            else {
-                car_update_activity_radio_button_true.setChecked(false);
-                car_update_activity_radio_button_false.setChecked(true);
-            }
+
+//            if (available.equals("1")) {
+//                car_update_activity_radio_button_true.setChecked(true);
+//                car_update_activity_radio_button_false.setChecked(false);
+//            }
+//            else {
+//                car_update_activity_radio_button_true.setChecked(false);
+//                car_update_activity_radio_button_false.setChecked(true);
+//            }
+
             Log.d("stev", regno+" "+brand+" "+model);
         }else{
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
