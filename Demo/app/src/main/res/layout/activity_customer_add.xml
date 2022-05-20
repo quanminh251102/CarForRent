@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Customer_AddActivity"
+    android:padding="30dp"
+    >
+
+    <Button
+        android:id="@+id/customer_add_activity_add_button"
+        android:layout_width="240dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/style_button"
+        android:text="Thêm"
+        android:textAllCaps="false"
+        android:textColorLink="#FFC107"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="30"
+        app:endIconMode="clear_text"
+        app:helperText="Bắt buộc*"
+        app:helperTextTextColor="@color/red"
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@drawable/ic_action_name_input"
+        tools:layout_editor_absoluteX="30dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/customer_add_activity_cusname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên khách hàng"
+            android:maxLength="30"
+            tools:layout_editor_absoluteX="16dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutName1"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="100"
+        app:endIconMode="clear_text"
+        app:helperText="Bắt buộc*"
+        app:helperTextTextColor="@color/red"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutName"
+        app:startIconDrawable="@drawable/ic_action_address_input"
+        tools:layout_editor_absoluteX="30dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/customer_add_activity_cusadd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Địa chỉ"
+            android:maxLength="100"
+            tools:layout_editor_absoluteX="16dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutName2"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="16dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="10"
+        app:endIconMode="clear_text"
+        app:helperText="Bắt buộc*"
+        app:helperTextTextColor="@color/red"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutName1"
+        app:startIconDrawable="@drawable/ic_action_phone_input"
+        tools:layout_editor_absoluteX="30dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/customer_add_activity_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Số điện thoại"
+            android:maxLength="10"
+            android:inputType="number"
+            tools:layout_editor_absoluteX="16dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
