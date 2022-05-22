@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 public class forgetpassword extends AppCompatActivity {
     private EditText editText;
-    private String subject = "Đặt lại mật khẩu";
-    private String message = "Đây là mã xác nhận";
+    private String subject = "Đặt lại mật khẩu của bạn";
+    private String message = "Đây là mã xác nhận để khôi phục mật khẩu của bạn, mã xác nhận là: ";
     private Button reset_password_btn;
     DBHelper MyDB;
     @Override

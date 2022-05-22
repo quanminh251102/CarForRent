@@ -50,11 +50,10 @@ public class login extends AppCompatActivity {
                 {
                     Boolean checkuserpass = DB.checkusernamepassword(user,pass);
                     if(checkuserpass == true){
+                        DB.delete_current_account();
+                        Boolean add_current = DB.add_current_account(user);
                         Toast.makeText(login.this,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent(login.this,HomeActivity.class);
-
                         Intent intent = new Intent(login.this,Menu_MainActivity.class);
-
                         startActivity(intent);
                     }
                     else

@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import android.accounts.Account;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -54,6 +55,24 @@ class DBHelper extends SQLiteOpenHelper {
             return true;
         }
     }
+    public Boolean updateData_user(String username,String name, String phone, String pass){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put("Fullname", name);
+        cv.put("Phonenumber", phone);
+        cv.put("Password", pass);
+
+        long result = db.update("Account", cv, "Username = ?", new String[]{username});
+        if(result == -1)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
     public Boolean checkusername(String username)
     {
         SQLiteDatabase MyDB = this.getWritableDatabase();
@@ -77,6 +96,48 @@ class DBHelper extends SQLiteOpenHelper {
         else
         {
             return false;
+        }
+    }
+    public String get_Name(String username)
+    {
+        SQLiteDatabase MyDB = getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select * from Account where Username = ?",new String[]{username});
+        if(cursor.getCount() > 0)
+        {
+            cursor.moveToFirst();
+            return cursor.getString(3);
+        }
+        else
+        {
+            return null;
+        }
+    }
+    public String get_Phone(String username)
+    {
+        SQLiteDatabase MyDB = getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select * from Account where Username = ?",new String[]{username});
+        if(cursor.getCount() > 0)
+        {
+            cursor.moveToFirst();
+            return cursor.getString(2);
+        }
+        else
+        {
+            return null;
+        }
+    }
+    public String get_Pass(String username)
+    {
+        SQLiteDatabase MyDB = getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select * from Account where Username = ?",new String[]{username});
+        if(cursor.getCount() > 0)
+        {
+            cursor.moveToFirst();
+            return cursor.getString(1);
+        }
+        else
+        {
+            return null;
         }
     }
     public String get_ID(String email)
@@ -215,7 +276,6 @@ class DBHelper extends SQLiteOpenHelper {
         }else {
             Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     void delete_one_customer(String row_id){
@@ -544,6 +604,41 @@ class DBHelper extends SQLiteOpenHelper {
     }
     // endregion
 
+    private static final String CREATE_TABLE_CURRENT_ACCOUNT = "create Table Current_Account(Current_User TEXT primary key)";
+
+    public Boolean add_current_account(String user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put("Current_User",user);
+        long result = db.insert("Current_Account",null,cv);
+        if(result == -1) return false;
+        else{
+            return true;
+        }
+
+    }
+    public String get_current_account()
+    {
+        String query = "SELECT * FROM " + "Current_Account";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor.getCount() > 0)
+        {
+            cursor.moveToFirst();
+            return cursor.getString(0);
+        }
+        else
+        {
+            return "";
+        }
+    }
+    void delete_current_account(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + "Current_Account");
+    }
+
     DBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
@@ -555,6 +650,7 @@ class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_RENT);
         db.execSQL(CREATE_TABLE_CUSTOMER);
         db.execSQL(CREATE_TABLE_CAR);
+        db.execSQL(CREATE_TABLE_CURRENT_ACCOUNT);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
@@ -562,6 +658,7 @@ class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RENT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CUSTOMER);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CAR);
+        db.execSQL("DROP TABLE IF EXISTS Current_Account");
         onCreate(db);
     }
 }
