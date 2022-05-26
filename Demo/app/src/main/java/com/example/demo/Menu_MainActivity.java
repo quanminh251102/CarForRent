@@ -5,12 +5,15 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class Menu_MainActivity extends AppCompatActivity {
     Button edit;
+    ImageButton back,logout;
     TextView name;
     CardView accountCard;
     CardView customerCard;
@@ -31,6 +34,9 @@ public class Menu_MainActivity extends AppCompatActivity {
         rentCard = findViewById(R.id.rentCard);
         exitCard = findViewById(R.id.exitCard);
         edit = findViewById(R.id.editProfileB);
+//        back = findViewById(R.id.back_button);
+//        logout = findViewById(R.id.logout_button);
+
         MyDB = new DBHelper(this);
 
 //Load tên lên Card
@@ -45,6 +51,23 @@ public class Menu_MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+//        back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(Menu_MainActivity.this,login.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                MyDB.delete_current_account();
+//                Intent intent = new Intent(Menu_MainActivity.this,login.class);
+//                startActivity(intent);
+//            }
+//        });
 
         accountCard.setOnClickListener(new View.OnClickListener() {
             @Override

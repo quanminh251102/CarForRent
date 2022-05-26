@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Account_UpdateActivity">
+    tools:context=".Account_UpdateActivity"
+    android:padding="30dp">
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutName"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -36,10 +37,10 @@
 
         android:layout_marginTop="16dp"
         app:counterEnabled="true"
-        app:counterMaxLength="10"
+        app:counterMaxLength="25"
         app:passwordToggleEnabled="true"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutName1"
-        app:startIconDrawable="@drawable/ic_action_phone_input"
+        app:startIconDrawable="@drawable/ic_pass"
         tools:layout_editor_absoluteX="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -47,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Mật khẩu"
-            android:maxLength="10"
+            android:maxLength="25"
             android:inputType="textPassword"
             tools:layout_editor_absoluteX="16dp" />
 

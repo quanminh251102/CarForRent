@@ -3,9 +3,12 @@ package com.example.demo;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -20,6 +23,7 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Customer_MainActivity extends AppCompatActivity {
 
@@ -27,13 +31,15 @@ public class Customer_MainActivity extends AppCompatActivity {
     FloatingActionButton add_button;
     ImageView empty_imageview;
     TextView no_data;
+    SearchView searchView;
 
     DBHelper myDB;
-    ArrayList<String> customer_cusid;
-    ArrayList<String> customer_cusname;
-    ArrayList<String> customer_cusadd;
-    ArrayList<String> customer_phone;
+//    ArrayList<String> customer_cusid;
+//    ArrayList<String> customer_cusname;
+//    ArrayList<String> customer_cusadd;
+//    ArrayList<String> customer_phone;
     Customer_CustomAdapter customerCustomAdapter;
+    List<Customer> mListCustomer; //*
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +59,11 @@ public class Customer_MainActivity extends AppCompatActivity {
             }
         });
 
-        customer_cusid = new ArrayList<>();
-        customer_cusname = new ArrayList<>();
-        customer_cusadd = new ArrayList<>();
-        customer_phone = new ArrayList<>();
+//        customer_cusid = new ArrayList<>();
+//        customer_cusname = new ArrayList<>();
+//        customer_cusadd = new ArrayList<>();
+//        customer_phone = new ArrayList<>();
+        mListCustomer = new ArrayList<>(); //*
         myDB = new DBHelper(Customer_MainActivity.this);
 
 //        myDB.add_customer("Nguyễn Hoàng Kiệt","TP Cao Lãnh, Đồng Tháp","0123242443");
@@ -64,10 +71,11 @@ public class Customer_MainActivity extends AppCompatActivity {
         storeDataInArrays();
 
         customerCustomAdapter = new Customer_CustomAdapter(Customer_MainActivity.this,this,
-                customer_cusid,
-                customer_cusname,
-                customer_cusadd,
-                customer_phone
+//                customer_cusid,
+//                customer_cusname,
+//                customer_cusadd,
+//                customer_phone,
+                mListCustomer //*
         );
 
         recyclerView.setAdapter(customerCustomAdapter);
@@ -90,10 +98,18 @@ public class Customer_MainActivity extends AppCompatActivity {
             no_data.setVisibility(View.VISIBLE);
         }else{
             while (cursor.moveToNext()){
-                customer_cusid.add(cursor.getString(0));;
-                customer_cusname.add(cursor.getString(1));;
-                customer_cusadd.add(cursor.getString(2));;
-                customer_phone.add(cursor.getString(3));;
+//                customer_cusid.add(cursor.getString(0));;
+//                customer_cusname.add(cursor.getString(1));;
+//                customer_cusadd.add(cursor.getString(2));;
+//                customer_phone.add(cursor.getString(3));;
+                // *
+                mListCustomer.add(new Customer(
+                        Integer.valueOf(cursor.getString(0)),
+                        String.valueOf(cursor.getString(1)),
+                        String.valueOf(cursor.getString(2)),
+                        String.valueOf(cursor.getString(3))
+                ));
+
             }
             empty_imageview.setVisibility(View.GONE);
             no_data.setVisibility(View.GONE);
@@ -104,7 +120,25 @@ public class Customer_MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.my_menu, menu);
-        return super.onCreateOptionsMenu(menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.search_button).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                customerCustomAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                customerCustomAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return true;
     }
 
     @Override
@@ -125,7 +159,7 @@ public class Customer_MainActivity extends AppCompatActivity {
                 DBHelper myDB = new DBHelper(Customer_MainActivity.this);
                 myDB.delete_all_customer();
                 //Refresh Activity
-                Intent intent = new Intent(Customer_MainActivity.this, MainActivity.class);
+                Intent intent = new Intent(Customer_MainActivity.this, Menu_MainActivity.class);
                 startActivity(intent);
                 finish();
             }
