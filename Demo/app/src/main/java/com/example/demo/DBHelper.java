@@ -262,6 +262,27 @@ class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    String getData_customer_name_with_id(String _rowid){
+        String res = "No name";
+
+        String selectQuery = "SELECT  * FROM " + TABLE_CUSTOMER + " where CusId=" + _rowid ;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);//selectQuery,selectedArguments
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                res = String.valueOf(cursor.getString(1));
+                ;//adding 2nd column data
+            } while (cursor.moveToNext());
+        }
+        // closing connection
+        cursor.close();
+        db.close();
+        return res;
+    }
+
     void updateData_customer(String row_id,String cusname, String cusadd, String phone){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -351,6 +372,7 @@ class DBHelper extends SQLiteOpenHelper {
     private static final String KEY_RENTALDATE = "RentalDate";
     private static final String KEY_RETURNDATE = "ReturnDate";
     private static final String KEY_FEES = "Fees";
+    private static final String KEY_PAID = "Paid";
 
     private static final String CREATE_TABLE_RENT =
             "CREATE TABLE " + TABLE_RENT +
@@ -360,7 +382,8 @@ class DBHelper extends SQLiteOpenHelper {
                     KEY_RENT_CUSID+ " INTEGER," +
                     KEY_RENTALDATE+ " DATE," +
                     KEY_RETURNDATE+ " DATE," +
-                    KEY_FEES+ " INTEGER" +
+                    KEY_FEES+ " INTEGER," +
+                    KEY_PAID+ "  BOOLEAN" +
                     ")";
 
     private String getDateTime(String inp) {
@@ -382,6 +405,7 @@ class DBHelper extends SQLiteOpenHelper {
         cv.put(KEY_RENTALDATE,getDateTime(rentaldate));
         cv.put(KEY_RETURNDATE,getDateTime(renturndate));
         cv.put(KEY_FEES,fees);
+        cv.put(KEY_PAID,Boolean.FALSE);
 
         updateData_car_available_with_regno(carreg,"0");
 
@@ -391,6 +415,101 @@ class DBHelper extends SQLiteOpenHelper {
         }else {
             Toast.makeText(context, "Thêm thành công", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    Cursor read_all_rent_with_paid(String _paid){
+        String query = "SELECT * FROM " + TABLE_RENT + " where Paid=" + _paid ;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
+    int get_rent_money_all(){
+        int res = 0;
+
+        String selectQuery = "SELECT  * FROM " + TABLE_RENT + " where Paid=1" ;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);//selectQuery,selectedArguments
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                res = res + Integer.valueOf(cursor.getString(5));
+                ;//adding 2nd column data
+            } while (cursor.moveToNext());
+        }
+        // closing connection
+        cursor.close();
+        db.close();
+
+        return res;
+    }
+
+    int get_rent_money_month(String _month, String year){
+        // _month = 01 02 ... 10 12
+        if (_month.length() == 1){
+            _month = "0" + _month;
+        }
+
+        int res = 0;
+
+        String selectQuery = "SELECT  * FROM " + TABLE_RENT + " where Paid=1" +
+                " and strftime('%Y',RentalDate)='" + year +
+                "' and strftime('%m',RentalDate)='"+ _month + "'"
+                ;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);//selectQuery,selectedArguments
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                res = res + Integer.valueOf(cursor.getString(5));
+                ;//adding 2nd column data
+            } while (cursor.moveToNext());
+        }
+        // closing connection
+        cursor.close();
+        db.close();
+
+        return res;
+    }
+
+    int get_rent_money_today(String day, String _month, String year){
+        // _month = 01 02 ... 10 12
+        // _day = 00
+        if (_month.length() == 1){
+            _month = "0" + _month;
+        }
+
+        int res = 0;
+
+        String selectQuery = "SELECT  * FROM " + TABLE_RENT + " where Paid=1" +
+                " and strftime('%Y',RentalDate)='" + year +
+                "' and strftime('%m',RentalDate)='"+ _month + "'" +
+                " and strftime('%d',RentalDate)='"+ day + "'"
+                ;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);//selectQuery,selectedArguments
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                res = res + Integer.valueOf(cursor.getString(5));
+                ;//adding 2nd column data
+            } while (cursor.moveToNext());
+        }
+        // closing connection
+        cursor.close();
+        db.close();
+
+        return res;
     }
 
     Cursor read_all_rent(){
@@ -424,11 +543,24 @@ class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    void updateData_rent_paid(String row_id, String _regno, String _paid){
+        String query = "UPDATE " + TABLE_RENT +
+                " SET " + KEY_PAID + "=" + _paid +
+                " WHERE " + KEY_RENTID + "="  + row_id ;
+
+        updateData_car_available_with_regno(_regno,"1");
+
+        Toast.makeText(context, "Xác nhận thanh toán thành công", Toast.LENGTH_SHORT).show();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.execSQL(query);
+    }
+
     void delete_one_rent(String row_id, String _regno){
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_RENT, KEY_RENTID+"=?", new String[]{row_id});
 
-        updateData_car_available_with_regno(_regno,"1");
+//        updateData_car_available_with_regno(_regno,"1");
 
         if(result == -1){
             Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();

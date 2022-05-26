@@ -20,7 +20,10 @@ public class Menu_MainActivity extends AppCompatActivity {
     CardView carCard;
     CardView rentCard;
     CardView exitCard;
+    CardView returnCard;
+    CardView reportCard;
     DBHelper MyDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,12 +31,18 @@ public class Menu_MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu_main);
 
         name = findViewById(R.id.name_textView);
-        accountCard = findViewById(R.id.accountCard);
-        customerCard = findViewById(R.id.customCard);
+
+        customerCard = findViewById(R.id.customerCard);
         carCard = findViewById(R.id.carCard);
         rentCard = findViewById(R.id.rentCard);
+        returnCard = findViewById(R.id.returnCard);
+        reportCard = findViewById(R.id.reportCard);
         exitCard = findViewById(R.id.exitCard);
+
         edit = findViewById(R.id.editProfileB);
+
+
+
 //        back = findViewById(R.id.back_button);
 //        logout = findViewById(R.id.logout_button);
 
@@ -69,14 +78,6 @@ public class Menu_MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        accountCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(Menu_MainActivity.this, Account_MainActivity.class);
-//                startActivity(intent);
-            }
-        });
-
         customerCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,6 +106,22 @@ public class Menu_MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Menu_MainActivity.this, login.class);
+                startActivity(intent);
+            }
+        });
+
+        returnCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Menu_MainActivity.this, Return_MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        reportCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Menu_MainActivity.this, Report_MainActivity.class);
                 startActivity(intent);
             }
         });

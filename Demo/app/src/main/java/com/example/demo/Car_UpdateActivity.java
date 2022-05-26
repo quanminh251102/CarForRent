@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -71,11 +72,14 @@ public class Car_UpdateActivity extends AppCompatActivity {
 
 //                Boolean car_available = car_update_activity_radio_button_true.isChecked();
                 Boolean car_available = true;
-                if (available == "1") car_available = true;
+                if (available.equals("1")) car_available = true;
                 else {
                     car_available = false;
                 }
                 myDB.updateData_car(car_id, regno, brand, model, car_price, car_available);
+
+                Intent intent = new Intent(Car_UpdateActivity.this,Car_MainActivity.class);
+                startActivity(intent);
             }
         });
         car_update_activity_delete_button.setOnClickListener(new View.OnClickListener() {

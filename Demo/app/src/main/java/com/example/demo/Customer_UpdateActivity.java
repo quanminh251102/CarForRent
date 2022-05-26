@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -51,6 +52,9 @@ public class Customer_UpdateActivity extends AppCompatActivity {
                 cusadd = customer_update_activity_cusadd.getText().toString().trim();
                 phone = customer_update_activity_phone.getText().toString().trim();
                 myDB.updateData_customer(cusid, cusname, cusadd, phone);
+
+                Intent intent = new Intent(Customer_UpdateActivity.this,Customer_MainActivity.class);
+                startActivity(intent);
             }
         });
         customer_update_activity_delete_button.setOnClickListener(new View.OnClickListener() {

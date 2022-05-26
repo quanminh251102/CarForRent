@@ -16,11 +16,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Demo">
         <activity
+            android:name=".Return_UpdateActivity"
+            android:parentActivityName=".Return_MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Return_MainActivity"
+            android:parentActivityName=".Menu_MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Report_MainActivity"
+            android:exported="false"
+            android:parentActivityName=".Menu_MainActivity" />
+        <activity
             android:name=".item_user"
             android:exported="false" />
         <activity
             android:name=".Account_UpdateActivity"
-            android:exported="false" />
+            android:parentActivityName=".Menu_MainActivity" />
         <activity
             android:name=".Rent_MainActivity"
             android:exported="false"

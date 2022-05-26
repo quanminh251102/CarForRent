@@ -25,7 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Car_MainActivity extends AppCompatActivity {
+public class Return_MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     FloatingActionButton add_button;
@@ -34,61 +34,52 @@ public class Car_MainActivity extends AppCompatActivity {
     SearchView searchView;
 
     DBHelper myDB;
-//    ArrayList<String> car_car_id;
-//    ArrayList<String> car_regno;
-//    ArrayList<String> car_brand;
-//    ArrayList<String> car_model;
-//    ArrayList<String> car_price;
-//    ArrayList<String> car_available;
-    Car_CustomAdapter carCustomAdapter;
+    ArrayList<String> rent_rent_id;
+    ArrayList<String> rent_regno;
+    ArrayList<String> rent_cusid;
+    ArrayList<String> rent_rentaldate;
+    ArrayList<String> rent_returndate;
+    ArrayList<String> rent_fees;
+    Return_CustomAdapter returnCustomAdapter;
 
-    List<Car> mListCar; //*
+    List<Rent> mListRent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_car_main);
+        setContentView(R.layout.activity_return_main);
 
         recyclerView = findViewById(R.id.recyclerView);
-        add_button = findViewById(R.id.car_mainactivity_add_button);
         empty_imageview = findViewById(R.id.empty_imageview);
         no_data = findViewById(R.id.no_data);
 
-        add_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Car_MainActivity.this,Car_AddActivity.class);
-                startActivity(intent);
-            }
-        });
 
-//        car_car_id = new ArrayList<>();
-//        car_regno = new ArrayList<>();
-//        car_brand = new ArrayList<>();
-//        car_model = new ArrayList<>();
-//        car_price = new ArrayList<>();
-//        car_available = new ArrayList<>();
+        rent_rent_id = new ArrayList<>();
+        rent_regno = new ArrayList<>();
+        rent_cusid = new ArrayList<>();
+        rent_rentaldate = new ArrayList<>();
+        rent_returndate = new ArrayList<>();
+        rent_fees = new ArrayList<>();
 
-        mListCar = new ArrayList<>(); //*
+        mListRent = new ArrayList<>();
 
-        myDB = new DBHelper(Car_MainActivity.this);
+        myDB = new DBHelper(Return_MainActivity.this);
 
         storeDataInArrays();
 
-        carCustomAdapter = new Car_CustomAdapter(
-                Car_MainActivity.this,
-                this,
-//                car_car_id,
-//                car_regno,
-//                car_brand,
-//                car_model,
-//                car_price,
-//                car_available,
-                mListCar
+        returnCustomAdapter = new Return_CustomAdapter(Return_MainActivity.this,this,
+//                rent_rent_id,
+//                rent_regno,
+//                rent_cusid,
+//                rent_rentaldate,
+//                rent_returndate,
+//                rent_fees,
+                mListRent
         );
 
-        recyclerView.setAdapter(carCustomAdapter);
+        recyclerView.setAdapter(returnCustomAdapter);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(Car_MainActivity.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(Return_MainActivity.this));
     }
 
     @Override
@@ -100,26 +91,29 @@ public class Car_MainActivity extends AppCompatActivity {
     }
 
     void storeDataInArrays(){
-        Cursor cursor = myDB.read_all_car();
+//        Cursor cursor = myDB.read_all_rent();
+
+        Cursor cursor = myDB.read_all_rent_with_paid("1");
+
         if(cursor.getCount() == 0){
             empty_imageview.setVisibility(View.VISIBLE);
             no_data.setVisibility(View.VISIBLE);
         }else{
             while (cursor.moveToNext()){
-//                car_car_id.add(cursor.getString(0));
-//                car_regno.add(cursor.getString(1));
-//                car_brand.add(cursor.getString(2));
-//                car_model.add(cursor.getString(3));
-//                car_price.add(cursor.getString(4));
-//                car_available.add(cursor.getString(5));
-                mListCar.add(new Car(
-                        Integer.valueOf(cursor.getString(0)),
+                rent_rent_id.add(cursor.getString(0));
+                rent_regno.add(cursor.getString(1));
+                rent_cusid.add(cursor.getString(2));
+                rent_rentaldate.add(cursor.getString(3));
+                rent_returndate.add(cursor.getString(4));
+                rent_fees.add(cursor.getString(5));
+                mListRent.add(new Rent(
+                        String.valueOf(cursor.getString(0)),
                         String.valueOf(cursor.getString(1)),
                         String.valueOf(cursor.getString(2)),
                         String.valueOf(cursor.getString(3)),
-                        Integer.valueOf(cursor.getString(4)),
-                        String.valueOf(cursor.getString(5))
-//                        true
+                        String.valueOf(cursor.getString(4)),
+                        String.valueOf(cursor.getString(5)),
+                        String.valueOf(cursor.getString(6))
                 ));
             }
             empty_imageview.setVisibility(View.GONE);
@@ -139,13 +133,13 @@ public class Car_MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                carCustomAdapter.getFilter().filter(query);
+                returnCustomAdapter.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                carCustomAdapter.getFilter().filter(newText);
+                returnCustomAdapter.getFilter().filter(newText);
                 return false;
             }
         });
@@ -163,14 +157,14 @@ public class Car_MainActivity extends AppCompatActivity {
     void confirmDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Xóa tất cả?");
-        builder.setMessage("Bạn chắc nhắn muốn xóa tất cả xe?");
+        builder.setMessage("Bạn chắc nhắn muốn xóa tất cả chi tiết thuê xe?");
         builder.setPositiveButton("Đúng", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                DBHelper myDB = new DBHelper(Car_MainActivity.this);
-                myDB.delete_all_car();
+                DBHelper myDB = new DBHelper(Return_MainActivity.this);
+                myDB.delete_all_rent();
                 //Refresh Activity
-                Intent intent = new Intent(Car_MainActivity.this, Menu_MainActivity.class);
+                Intent intent = new Intent(Return_MainActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }

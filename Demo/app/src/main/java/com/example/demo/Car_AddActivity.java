@@ -2,6 +2,7 @@ package com.example.demo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -53,6 +54,9 @@ public class Car_AddActivity extends AppCompatActivity {
 //                        car_activity_add_radio_button_true.isChecked()
                         true
                 );
+
+                Intent intent = new Intent(Car_AddActivity.this,Car_MainActivity.class);
+                startActivity(intent);
             }
         });
     }

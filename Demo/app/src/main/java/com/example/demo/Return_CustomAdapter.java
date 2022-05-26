@@ -21,8 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rent_CustomAdapter extends RecyclerView.Adapter<Rent_CustomAdapter.MyViewHolder> implements Filterable {
-
+public class Return_CustomAdapter extends RecyclerView.Adapter<Return_CustomAdapter.MyViewHolder> implements Filterable {
     private Context context;
     private Activity activity;
     private ArrayList rent_rent_id;
@@ -34,15 +33,15 @@ public class Rent_CustomAdapter extends RecyclerView.Adapter<Rent_CustomAdapter.
 
     private List<Rent> mListRents;
     private List<Rent> mListRentsOld;
-    
-    public  Rent_CustomAdapter(Activity activity, Context context,
+
+    public Return_CustomAdapter(Activity activity, Context context,
 //                       ArrayList rent_rent_id,
 //                       ArrayList rent_regno,
 //                       ArrayList rent_cusid,
 //                       ArrayList rent_rentaldate,
 //                       ArrayList rent_returndate,
-//                       ArrayList rent_fees
-                        List<Rent> mListRents
+//                       ArrayList rent_fees,
+                                List<Rent> mListRents
 
     ){
         this.activity = activity;
@@ -53,33 +52,31 @@ public class Rent_CustomAdapter extends RecyclerView.Adapter<Rent_CustomAdapter.
 //        this.rent_rentaldate = rent_rentaldate;
 //        this.rent_returndate = rent_returndate;
 //        this.rent_fees = rent_fees;
+
         this.mListRents = mListRents;
         this.mListRentsOld = mListRents;
     }
 
-    public Rent_CustomAdapter(List<Rent> mListRents) {
+    public Return_CustomAdapter(List<Rent> mListRents) {
         this.mListRents = mListRents;
         this.mListRentsOld = mListRents;
     }
-    
     @NonNull
     @Override
-    public Rent_CustomAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Return_CustomAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.rent_row, parent, false);
-        return new Rent_CustomAdapter.MyViewHolder(view);
+        return new Return_CustomAdapter.MyViewHolder(view);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onBindViewHolder(@NonNull final Rent_CustomAdapter.MyViewHolder holder, final int position) {
-//        holder.rent_row_rentid.setText(String.valueOf(rent_rent_id.get(position)));
-
+    public void onBindViewHolder(@NonNull final Return_CustomAdapter.MyViewHolder holder, final int position) {
         Rent rent = mListRents.get(position);
         if (rent == null){
             return;
         }
-        
+
         DBHelper db = new DBHelper(context);
         String _cusid_name = db.getData_customer_name_with_id(String.valueOf(rent.getRent_cusid()));
 
@@ -100,7 +97,7 @@ public class Rent_CustomAdapter extends RecyclerView.Adapter<Rent_CustomAdapter.
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, Rent_UpdateActivity.class);
+                Intent intent = new Intent(context, Return_UpdateActivity.class);
                 intent.putExtra("rent_id", String.valueOf(rent.getRentid()));
                 intent.putExtra("regno", String.valueOf(rent.getCarreg()));
                 intent.putExtra("cusid", String.valueOf(rent.getRent_cusid()));

@@ -292,13 +292,14 @@ public class Rent_UpdateActivity extends AppCompatActivity implements AdapterVie
 
     void confirmDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Xóa phiếu thuê " +rent_id + " ?");
-        builder.setMessage("Bạn chắc chắn muốn xóa phiếu thuê " + rent_id + " ?");
+        builder.setTitle("Phiếu thuê " +rent_id + " ?");
+        builder.setMessage("Bạn muốn xác nhận thanh toán phiếu thuê " + rent_id + " ?");
         builder.setPositiveButton("Đúng", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 DBHelper myDB = new DBHelper(Rent_UpdateActivity.this);
-                myDB.delete_one_rent(rent_id,regno);
+//                myDB.delete_one_rent(rent_id,regno);
+                myDB.updateData_rent_paid(rent_id,regno,"1");
                 finish();
             }
         });

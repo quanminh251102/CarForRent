@@ -127,7 +127,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/accountCard"
+            android:id="@+id/customerCard"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_margin="8dp"
@@ -146,7 +146,7 @@
                     android:id="@+id/image_view1"
                     android:layout_width="128dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/ic_action_name"
+                    android:src="@drawable/ic_customer"
                     app:layout_constraintBottom_toTopOf="@+id/textView1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -158,7 +158,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="TÀI KHOẢN"
+                    android:text="KHÁCH HÀNG"
                     android:textAllCaps="true"
                     android:textColor="@color/colorAccent"
                     android:textSize="14sp"
@@ -174,7 +174,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/customCard"
+            android:id="@+id/carCard"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_margin="8dp"
@@ -193,7 +193,7 @@
                     android:id="@+id/image_view20"
                     android:layout_width="128dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/ic_customer"
+                    android:src="@drawable/ic_car"
                     app:layout_constraintBottom_toTopOf="@+id/textView20"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -205,7 +205,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="KHÁCH HÀNG"
+                    android:text="XE"
                     android:textAllCaps="true"
                     android:textColor="@color/colorAccent"
                     android:textSize="14sp"
@@ -235,7 +235,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/carCard"
+            android:id="@+id/rentCard"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_margin="8dp"
@@ -254,7 +254,7 @@
                     android:id="@+id/image_view21"
                     android:layout_width="128dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/ic_car"
+                    android:src="@drawable/ic_rent"
                     app:layout_constraintBottom_toTopOf="@+id/textView21"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -266,7 +266,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="XE"
+                    android:text="PHIẾU THUÊ XE"
                     android:textAllCaps="true"
                     android:textColor="@color/colorAccent"
                     android:textSize="14sp"
@@ -282,7 +282,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/rentCard"
+            android:id="@+id/returnCard"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_margin="8dp"
@@ -301,7 +301,7 @@
                     android:id="@+id/image_view22"
                     android:layout_width="128dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/ic_rent"
+                    android:src="@drawable/ic_return"
                     app:layout_constraintBottom_toTopOf="@+id/textView22"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -313,7 +313,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="THUÊ XE"
+                    android:text="LỊCH SỬ"
                     android:textAllCaps="true"
                     android:textColor="@color/colorAccent"
                     android:textSize="14sp"
@@ -342,7 +342,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/returnCard"
+            android:id="@+id/reportCard"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_margin="8dp"
@@ -361,7 +361,7 @@
                     android:id="@+id/image_view23"
                     android:layout_width="128dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/ic_return"
+                    android:src="@drawable/ic_action_name"
                     app:layout_constraintBottom_toTopOf="@+id/textView23"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -373,7 +373,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="TRẢ XE"
+                    android:text="THỐNG KÊ"
                     android:textAllCaps="true"
                     android:textColor="@color/colorAccent"
                     android:textSize="14sp"

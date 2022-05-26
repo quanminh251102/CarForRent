@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,33 +20,46 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Car_CustomAdapter extends RecyclerView.Adapter<Car_CustomAdapter.MyViewHolder>{
+public class Car_CustomAdapter extends RecyclerView.Adapter<Car_CustomAdapter.MyViewHolder> implements Filterable {
     private Context context;
     private Activity activity;
-    private ArrayList car_car_id;
-    private ArrayList car_regno;
-    private ArrayList car_brand;
-    private ArrayList car_model;
-    private ArrayList car_price;
-    private ArrayList car_available;
+//    private ArrayList car_car_id;
+//    private ArrayList car_regno;
+//    private ArrayList car_brand;
+//    private ArrayList car_model;
+//    private ArrayList car_price;
+//    private ArrayList car_available;
 
-    Car_CustomAdapter(Activity activity, Context context,
-                      ArrayList car_car_id,
-                      ArrayList car_regno,
-                      ArrayList car_brand,
-                      ArrayList car_model,
-                      ArrayList car_price,
-                      ArrayList car_available
+    private List<Car> mListCars;
+    private List<Car> mListCarsOld;
+    
+    public Car_CustomAdapter(Activity activity, Context context,
+//                      ArrayList car_car_id,
+//                      ArrayList car_regno,
+//                      ArrayList car_brand,
+//                      ArrayList car_model,
+//                      ArrayList car_price,
+//                      ArrayList car_available,
+                      List<Car> mListCars
     ){
         this.activity = activity;
         this.context = context;
-        this.car_car_id = car_car_id;
-        this.car_regno = car_regno;
-        this.car_brand = car_brand;
-        this.car_model = car_model;
-        this.car_price = car_price;
-        this.car_available = car_available;
+//        this.car_car_id = car_car_id;
+//        this.car_regno = car_regno;
+//        this.car_brand = car_brand;
+//        this.car_model = car_model;
+//        this.car_price = car_price;
+//        this.car_available = car_available;
+
+        this.mListCars = mListCars;
+        this.mListCarsOld = mListCars;
+    }
+
+    public Car_CustomAdapter(List<Car> mListCars) {
+        this.mListCars = mListCars;
+        this.mListCarsOld = mListCars;
     }
 
     @NonNull
@@ -58,13 +73,21 @@ public class Car_CustomAdapter extends RecyclerView.Adapter<Car_CustomAdapter.My
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull final Car_CustomAdapter.MyViewHolder holder, final int position) {
-//        holder.car_row_carid.setText(String.valueOf(car_car_id.get(position)));
-        holder.car_row_regno.setText("Biển số xe : "+String.valueOf(car_regno.get(position)) );
-        holder.car_row_brand.setText("Hãng xe : "+String.valueOf(car_brand.get(position)));
-        holder.car_row_model.setText("Kiểu xe : " +String.valueOf(car_model.get(position)) );
-        holder.car_row_price.setText(String.valueOf(car_price.get(position)) + " VNĐ/Ngày");
 
-        if (String.valueOf(car_available.get(position)).equals("1")){
+        Car car = mListCars.get(position);
+        if (car == null){
+            return;
+        }
+        
+//        holder.car_row_carid.setText(String.valueOf(car_car_id.get(position)));
+        holder.car_row_regno.setText("Biển số xe : "+String.valueOf(car.getRegno()));
+        holder.car_row_brand.setText("Hãng xe : "+String.valueOf(car.getBrand()));
+        holder.car_row_model.setText("Kiểu xe : " +String.valueOf(car.getModel()) );
+        holder.car_row_price.setText(String.valueOf(car.getPrice()) + " VNĐ/Ngày");
+
+//        holder.car_row_available.setText(String.valueOf(car.getAvailable()));
+
+        if (String.valueOf(car.getAvailable()).equals("1")){
             holder.car_row_available.setText("Còn trống");
             holder.car_row_available.setTextColor(Color.GREEN);
         }
@@ -78,12 +101,12 @@ public class Car_CustomAdapter extends RecyclerView.Adapter<Car_CustomAdapter.My
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, Car_UpdateActivity.class);
-                intent.putExtra("car_id", String.valueOf(car_car_id.get(position)));
-                intent.putExtra("regno", String.valueOf(car_regno.get(position)));
-                intent.putExtra("brand", String.valueOf(car_brand.get(position)));
-                intent.putExtra("model", String.valueOf(car_model.get(position)));
-                intent.putExtra("price", String.valueOf(car_price.get(position)));
-                intent.putExtra("available", String.valueOf(car_available.get(position)));
+                intent.putExtra("car_id", String.valueOf(car.getCarid()));
+                intent.putExtra("regno", String.valueOf(car.getRegno()));
+                intent.putExtra("brand", String.valueOf(car.getBrand()));
+                intent.putExtra("model", String.valueOf(car.getModel()));
+                intent.putExtra("price", String.valueOf(car.getPrice()));
+                intent.putExtra("available", String.valueOf(car.getAvailable()));
                 activity.startActivityForResult(intent, 1);
             }
         });
@@ -91,7 +114,7 @@ public class Car_CustomAdapter extends RecyclerView.Adapter<Car_CustomAdapter.My
 
     @Override
     public int getItemCount() {
-        return car_car_id.size();
+        return mListCars.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -118,5 +141,39 @@ public class Car_CustomAdapter extends RecyclerView.Adapter<Car_CustomAdapter.My
             mainLayout.setAnimation(translate_anim);
         }
 
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String strSearch = constraint.toString();
+                if(strSearch.equals(""))
+                {
+                    mListCars = mListCarsOld;
+                }
+                else
+                {
+                    List<Car> list = new ArrayList<>();
+                    for (Car Car : mListCarsOld){
+                        if(Car.getRegno().toLowerCase().contains(strSearch.toLowerCase())){
+                            list.add(Car);
+                        }
+                    }
+                    mListCars = list;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mListCars;
+
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                mListCars = (ArrayList) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }

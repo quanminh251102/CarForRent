@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">QUẢN LÝ CHO THUÊ XE</string>
+
+    <string-array name="Spinner_items">
+        <item>Tất cả</item>
+        <item>Tháng và năm</item>
+    </string-array>
 </resources>
