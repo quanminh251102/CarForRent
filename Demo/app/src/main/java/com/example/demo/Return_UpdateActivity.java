@@ -62,7 +62,7 @@ public class Return_UpdateActivity extends AppCompatActivity implements AdapterV
         //Set actionbar title after getAndSetIntentData method
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            ab.setTitle("PhiếuThuêXe("+rent_id+")");
+            ab.setTitle("Chi tiết phiếu thuê xe ("+rent_id+")");
         }
 
         rent_update_activity_delete_button.setOnClickListener(new View.OnClickListener() {

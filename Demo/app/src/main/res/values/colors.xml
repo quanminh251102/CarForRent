@@ -11,12 +11,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
-    <color name="colorPrimary">#8cbbf1</color>
+    <color name="button_color">#69D1C5</color>
+    <color name="textcardColor">#3f3f3f</color>
+    <color name="login_text">#379392</color>
+    <color name="colorPrimary">#48B8D0</color>
 
     <color name="colorPrimaryDark">#8cbbf1</color>
 
-    <color name="colorAccent">#8cbbf1</color>
+    <color name="colorAccent">#00F0B5</color>
 
     <color name="red">#E94252</color>
     <color name="button">#feeaa5</color>

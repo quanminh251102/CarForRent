@@ -30,8 +30,6 @@ public class forgetpassword extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sendEmail();
-                Intent intent = new Intent(forgetpassword.this, forgetpassword_2.class);
-                startActivity(intent);
             }
         });
     }
@@ -50,6 +48,8 @@ public class forgetpassword extends AppCompatActivity {
                 String MyID = MyDB.get_ID(mEmail);
                 JavaMailAPI javaMailAPI = new JavaMailAPI(this, mEmail, subject, message + " " +MyID);
                 javaMailAPI.execute();
+                Intent intent = new Intent(forgetpassword.this, forgetpassword_2.class);
+                startActivity(intent);
             }
             else
             {

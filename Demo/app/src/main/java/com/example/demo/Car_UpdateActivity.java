@@ -56,7 +56,7 @@ public class Car_UpdateActivity extends AppCompatActivity {
         //Set actionbar title after getAndSetIntentData method
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            ab.setTitle("Xe("+regno+")");
+            ab.setTitle("Chi tiết xe ("+regno+")");
         }
 
         car_update_activity_update_button.setOnClickListener(new View.OnClickListener() {

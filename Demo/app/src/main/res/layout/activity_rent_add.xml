@@ -16,7 +16,7 @@
         android:text="Xe :"
 
         android:textSize="18sp"
-
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
+        android:textColor="@color/black"
         android:text="Khách hàng :"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,11 +84,12 @@
         android:id="@+id/rent_add_activity_rentaldate_button"
         android:layout_width="115dp"
         android:layout_height="43dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="27dp"
         android:layout_marginEnd="4dp"
         android:background="@drawable/style_button"
         android:gravity="center"
         android:text="Chọn ngày"
+
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textStyle="normal|bold"
@@ -124,7 +126,7 @@
         android:id="@+id/rent_add_activity_returndate_button"
         android:layout_width="115dp"
         android:layout_height="43dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
 

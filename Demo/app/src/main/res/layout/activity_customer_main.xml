@@ -14,10 +14,11 @@
         android:layout_marginRight="28dp"
         android:layout_marginBottom="28dp"
         android:clickable="true"
+        android:backgroundTint="@color/white"
         android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add"
+        app:srcCompat="@drawable/add"
         />
 
     <androidx.recyclerview.widget.RecyclerView

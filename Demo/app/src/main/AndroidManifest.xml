@@ -21,18 +21,20 @@
             android:exported="false" />
         <activity
             android:name=".Return_MainActivity"
+            android:label="Lịch sử"
             android:parentActivityName=".Menu_MainActivity"
             android:exported="false" />
         <activity
             android:name=".Report_MainActivity"
+            android:label="Thống kê doanh thu"
             android:exported="false"
             android:parentActivityName=".Menu_MainActivity" />
         <activity
-            android:name=".item_user"
-            android:exported="false" />
-        <activity
             android:name=".Account_UpdateActivity"
-            android:parentActivityName=".Menu_MainActivity" />
+            android:label="Cập nhật thông tin"
+            android:exported="false"
+            android:parentActivityName=".Menu_MainActivity"
+            />
         <activity
             android:name=".Rent_MainActivity"
             android:exported="false"
@@ -79,9 +81,6 @@
             android:name=".Menu_MainActivity"
             android:exported="false"
             android:label="Quản Lý Thuê Xe" />
-        <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
         <activity
             android:name=".signup"
             android:exported="false" />
