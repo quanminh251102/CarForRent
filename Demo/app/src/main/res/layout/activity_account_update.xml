@@ -83,6 +83,7 @@
         android:id="@+id/update_button"
         android:layout_width="240dp"
         android:layout_height="41dp"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/style_button"
         android:text="Cập nhật"
         android:textAllCaps="false"
@@ -90,7 +91,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutName2" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
