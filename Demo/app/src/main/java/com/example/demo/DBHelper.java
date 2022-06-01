@@ -540,7 +540,13 @@ class DBHelper extends SQLiteOpenHelper {
         }else {
             Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
         }
-
+    }
+    void updateData_rent_when_car_update(String oldRegno,String newRegno){
+        String query = "UPDATE " + TABLE_RENT +
+                " SET " + KEY_CARREG + "=" + "'" + newRegno + "'" +
+                " WHERE " + KEY_CARREG + "=" + "'" + oldRegno + "' ";
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(query);
     }
 
     void updateData_rent_paid(String row_id, String _regno, String _paid){
@@ -659,8 +665,8 @@ class DBHelper extends SQLiteOpenHelper {
         }else {
             Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
         }
-
     }
+
 
     void updateData_car_available_with_regno(String _regno, String _available){
         String query = "UPDATE " + TABLE_CAR +

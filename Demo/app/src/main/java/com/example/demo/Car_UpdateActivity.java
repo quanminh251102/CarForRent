@@ -28,6 +28,7 @@ public class Car_UpdateActivity extends AppCompatActivity {
     Button car_update_activity_delete_button;
 
     String car_id;
+    String old_car_regno;
     String regno;
     String brand;
     String model;
@@ -77,7 +78,7 @@ public class Car_UpdateActivity extends AppCompatActivity {
                     car_available = false;
                 }
                 myDB.updateData_car(car_id, regno, brand, model, car_price, car_available);
-
+                myDB.updateData_rent_when_car_update(old_car_regno,regno);
                 Intent intent = new Intent(Car_UpdateActivity.this,Car_MainActivity.class);
                 startActivity(intent);
             }
@@ -105,6 +106,8 @@ public class Car_UpdateActivity extends AppCompatActivity {
             model = getIntent().getStringExtra("model");
             price = getIntent().getStringExtra("price");
             available = getIntent().getStringExtra("available");
+            old_car_regno = regno;
+
 
             //Setting Intent Data
             car_update_activity_regno.setText(regno);
