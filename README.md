@@ -8,9 +8,9 @@
 
 | STT | MSSV     | Họ và tên                                                  | Lớp      |
 | --- | -------- | ---------------------------------------------------------- | -------- |
-| 1   | 205210068 | Nguyễn Hoàng Kiệt          | KTPM2020 |
+| 1   | 20520068 | Nguyễn Hoàng Kiệt          | KTPM2020 |
 | 2   | 20520708 | Lê Minh Quân             | KTPM2020 |
-| 3   | 19521904 | Trần Quốc Thắng | KTPM2020 |
+| 3   | 20521904 | Trần Quốc Thắng | KTPM2020 |
 
 
 ## 2. Mục đích xây dựng ứng dụng 
